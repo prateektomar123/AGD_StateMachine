@@ -2,6 +2,7 @@ using UnityEngine;
 using StatePattern.Enemy.Bullet;
 using StatePattern.Main;
 using StatePattern.Player;
+using StatePattern.StateMachine;
 
 namespace StatePattern.Enemy
 {

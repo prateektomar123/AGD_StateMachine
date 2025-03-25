@@ -1,12 +1,14 @@
+using StatePattern.StateMachine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 
 namespace StatePattern.Enemy
 {
-    public class OnePunchManStateMachine
+    public class OnePunchManStateMachine : IStateMachine
     {
         private OnePunchManController Owner;
         private IState currentState;
-        protected Dictionary<States, IState> StatesI = new Dictionary<States, IState>();
+        protected Dictionary<States, IState> States = new Dictionary<States, IState>();
 
         public OnePunchManStateMachine(OnePunchManController Owner)
         {
@@ -17,18 +19,14 @@ namespace StatePattern.Enemy
 
         private void CreateStates()
         {
-            StatesI.Add(States.IDLE, new IdleState(this));
-            StatesI.Add(States.ROTATING, new RotatingState(this));
-            StatesI.Add(States.SHOOTING, new ShootingState(this));
+            States.Add(StateMachine.States.IDLE, new IdleState(this));
+            States.Add(StateMachine.States.ROTATING, new RotatingState(this));
+            States.Add(StateMachine.States.SHOOTING, new ShootingState(this));
         }
 
         private void SetOwner()
         {
-<<<<<<< Updated upstream:Assets/Scripts/Enemy/OnePunchMan/OnePunchManStateMachine.cs
-            foreach(IState state in States.Values)
-=======
-            foreach (IState state in StatesI.Values)
->>>>>>> Stashed changes:Assets/Scripts/Enemy/OnePunchMan/States/OnePunchManStateMachine.cs
+            foreach (IState state in States.Values)
             {
                 state.Owner = Owner;
             }
@@ -43,13 +41,6 @@ namespace StatePattern.Enemy
             currentState?.OnStateEnter();
         }
 
-        public void ChangeState(States newState) => ChangeState(StatesI[newState]);
-    }
-
-    public enum OnePunchManStates
-    {
-        IDLE,
-        ROTATING,
-        SHOOTING
+        public void ChangeState(States newState) => ChangeState(States[newState]);
     }
 }
