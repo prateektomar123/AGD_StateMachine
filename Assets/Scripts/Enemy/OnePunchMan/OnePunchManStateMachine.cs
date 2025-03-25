@@ -6,7 +6,7 @@ namespace StatePattern.Enemy
     {
         private OnePunchManController Owner;
         private IState currentState;
-        protected Dictionary<OnePunchManStates, IState> States = new Dictionary<OnePunchManStates, IState>();
+        protected Dictionary<States, IState> StatesI = new Dictionary<States, IState>();
 
         public OnePunchManStateMachine(OnePunchManController Owner)
         {
@@ -17,14 +17,18 @@ namespace StatePattern.Enemy
 
         private void CreateStates()
         {
-            States.Add(OnePunchManStates.IDLE, new IdleState(this));
-            States.Add(OnePunchManStates.ROTATING, new RotatingState(this));
-            States.Add(OnePunchManStates.SHOOTING, new ShootingState(this));
+            StatesI.Add(States.IDLE, new IdleState(this));
+            StatesI.Add(States.ROTATING, new RotatingState(this));
+            StatesI.Add(States.SHOOTING, new ShootingState(this));
         }
 
         private void SetOwner()
         {
+<<<<<<< Updated upstream:Assets/Scripts/Enemy/OnePunchMan/OnePunchManStateMachine.cs
             foreach(IState state in States.Values)
+=======
+            foreach (IState state in StatesI.Values)
+>>>>>>> Stashed changes:Assets/Scripts/Enemy/OnePunchMan/States/OnePunchManStateMachine.cs
             {
                 state.Owner = Owner;
             }
@@ -39,7 +43,7 @@ namespace StatePattern.Enemy
             currentState?.OnStateEnter();
         }
 
-        public void ChangeState(OnePunchManStates newState) => ChangeState(States[newState]);
+        public void ChangeState(States newState) => ChangeState(StatesI[newState]);
     }
 
     public enum OnePunchManStates
