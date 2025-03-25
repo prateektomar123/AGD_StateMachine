@@ -1,32 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using StatePattern.Enemy;
-using StatePattern.StateMachine;
-using UnityEngine;
+using System.Collections.Generic;
 
-public class GenericStateMachine<T> where T : EnemyController
+namespace StatePattern.StateMachine
 {
-    protected T Owner;
-    protected IState currentState;
-    protected Dictionary<States, IState> States = new Dictionary<States, IState>();
-
-    // Constructor sets the owner.
-    public GenericStateMachine(T Owner) => this.Owner = Owner;
-
-    protected void ChangeState(IState newState)
+    public class GenericStateMachine<T> where T : EnemyController
     {
-        currentState?.OnStateExit();
-        currentState = newState;
-        currentState?.OnStateEnter();
-    }
+        protected T Owner;
+        protected IState currentState;
+        protected Dictionary<States, IState> States = new Dictionary<States, IState>();
 
-    public void ChangeState(States newState) => ChangeState(States[newState]);
+        public GenericStateMachine(T Owner) => this.Owner = Owner;
 
-    protected void SetOwner()
-    {
-        foreach (IState state in States.Values)
+        public void Update() => currentState?.Update();
+
+        protected void ChangeState(IState newState)
         {
-            state.Owner = Owner;
+            currentState?.OnStateExit();
+            currentState = newState;
+            currentState?.OnStateEnter();
+        }
+
+        public void ChangeState(States newState) => ChangeState(States[newState]);
+
+        protected void SetOwner()
+        {
+            foreach (IState state in States.Values)
+            {
+                state.Owner = Owner;
+            }
         }
     }
 }
