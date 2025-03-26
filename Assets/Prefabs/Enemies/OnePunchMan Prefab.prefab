@@ -223,7 +223,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4250023737535591082}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -307,11 +307,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Agent: {fileID: 4250023737535591061}
+  enemyGraphic: {fileID: 4250023736550768601}
   detectableRange: {fileID: 8422080348689439521}
   muzzleFlash: {fileID: 4951415841666850901}
-  bloodSplatter: {fileID: 0}
+  enemyColors: []
   bloodStain: {fileID: 2531642671473160316, guid: efa600927a40a5547a583186d52428d4, type: 3}
-  enemyGraphic: {fileID: 4250023736550768601}
 --- !u!135 &256093062051459923
 SphereCollider:
   m_ObjectHideFlags: 0
